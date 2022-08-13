@@ -10,7 +10,7 @@ const WebClient = new WebhookClient({ id: Config.ID, token: Config.Token });
 const CheckRSS = async() => {
     parser.parseURL(Config.NewsURL).then((NewsFeed) => {
         const NewsItems = NewsFeed.items[0]
-        let date = new Date().toLocaleString('fi-FI', { timeZone: 'UTC' })
+        let date = new Date().toLocaleString('fi-FI')
         if (SaveTime !== NewsItems.pubDate) {
             const Embed = {
                 color: 16711680,
