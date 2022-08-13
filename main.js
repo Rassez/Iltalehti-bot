@@ -10,7 +10,7 @@ const WebClient = new WebhookClient({ id: Config.ID, token: Config.Token });
 const CheckRSS = async() => {
     parser.parseURL(Config.NewsURL).then((NewsFeed) => {
         const NewsItems = NewsFeed.items[0]
-        let date = new Date().toLocaleString()
+        let date = new Date().toLocaleString('fi-FI', { timeZone: 'UTC' })
         if (SaveTime !== NewsItems.pubDate) {
             const Embed = {
                 color: 16711680,
@@ -22,7 +22,7 @@ const CheckRSS = async() => {
                 },
                 description: NewsItems.content,
                 Image: {
-                    url: NewsItems.enclosure.url !== undefined ? NewsItems.enclosure.url : 'https://assets.ilcdn.fi/iltalehti_placeholder_some.png',
+                    url: NewsItems.enclosure?.url ? NewsItems.enclosure.url : 'https://assets.ilcdn.fi/iltalehti_placeholder_some.png',
                 },
                 footer: {
                     text: date,
